@@ -1,34 +1,8 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import {
-  Plus,
-  Bell,
-  Search,
-  ChevronDown,
-  Pin,
-  MoreHorizontal,
-  Share2,
-  User,
-  Lock,
-  LayoutDashboard,
-  Filter,
-  Sparkles,
-  Sun,
-  Moon,
-  GripVertical,
-  Check,
-  X,
-  AlertTriangle,
-  CircleCheck,
-  Info,
-  Users,
-  Target,
-  LineChartIcon,
-  ClipboardList,
-  Settings,
-  Home,
-  TimerReset,
+import {  Plus,  Bell,  Search,  ChevronDown,  Pin,  MoreHorizontal,  Share2,  User,  Lock,  LayoutDashboard,  Filter,  Sparkles,  Sun,  Moon,  GripVertical,  X,  AlertTriangle,  CircleCheck,  Info,  Users,  Target,  LineChartIcon,  ClipboardList,  Settings,  Home,  TimerReset,} from "lucide-react";
 } from "lucide-react";
+import Image from "next/image";
 import {
   ResponsiveContainer,
   LineChart,
@@ -215,7 +189,18 @@ function IconButton({ children, badge, title }: { children: React.ReactNode; bad
 }
 
 // === Card shell with selectable / draggable affordances, permissions & audit ===
-function CardShell({ title, subtitle, value, notify, children, locked, owner, onSelect, selected }: any) {
+type CardShellProps = {
+  title: string;
+  subtitle?: string;
+  value?: string;
+  notify?: number;
+  children?: React.ReactNode;
+  locked?: boolean;
+  owner: string;
+  onSelect: () => void;
+  selected: boolean;
+};
+function CardShell({ title, subtitle, value, notify, children, locked, owner, onSelect, selected }: CardShellProps) {
   return (
     <div className={classNames("group relative rounded-3xl border bg-white p-5 shadow transition-shadow hover:shadow-lg dark:bg-neutral-950 dark:border-neutral-800", selected && "ring-2 ring-blue-500")}
       role="region" aria-label={title}>
@@ -243,7 +228,7 @@ function CardShell({ title, subtitle, value, notify, children, locked, owner, on
         </div>
         <button className="flex items-center gap-2" title={`Owner: ${owner}`}
           onClick={() => alert(`Filtering by owner: ${owner}`)}>
-          <img alt="owner avatar" src={`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(owner)}`} className="h-6 w-6 rounded-full" />
+          <Image alt="owner avatar" src={`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(owner)}`} width={24} height={24} className="h-6 w-6 rounded-full" />
           <span className="underline">{owner}</span>
         </button>
       </div>
